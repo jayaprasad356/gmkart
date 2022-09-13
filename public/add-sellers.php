@@ -5,64 +5,32 @@ $function = new functions;
 include_once('includes/custom-functions.php');
 $fn = new custom_functions;
 
-$res = $db->getResult();
-
-$sql_query = "SELECT value FROM settings WHERE variable = 'Currency'";
-$pincode_ids_exc = "";
-$db->sql($sql_query);
-$res_cur = $db->getResult();
 
 if (isset($_POST['btnAdd'])) {
-    if ($permissions['goldsmithmaster']['create'] == 1) {
-        $error = array();
-        $name = $db->escapeString($fn->xss_clean($_POST['name']));
-        $sundry = $db->escapeString($fn->xss_clean($_POST['sundry']));
-        $open_debit = $db->escapeString($fn->xss_clean($_POST['open_debit']));
-        $open_credit = $db->escapeString($fn->xss_clean($_POST['open_credit']));
-        $value =$db->escapeString($fn->xss_clean($_POST['value']));
-        $place = $db->escapeString($fn->xss_clean($_POST['place']));
-        $address = $db->escapeString($fn->xss_clean($_POST['address']));
-        $phone = $db->escapeString($fn->xss_clean($_POST['phone']));
-        $tngst = $db->escapeString($fn->xss_clean($_POST['tngst']));
-        $pure_debit=$db->escapeString($fn->xss_clean($_POST['pure_debit']));
-        $pure_credit=$db->escapeString($fn->xss_clean($_POST['pure_credit']));
+    $error = array();
+    $name = $db->escapeString($fn->xss_clean($_POST['name']));
+    $email = $db->escapeString($fn->xss_clean($_POST['email']));
+    $mobile = $db->escapeString($fn->xss_clean($_POST['mobile']));
+    $password = $db->escapeString($fn->xss_clean($_POST['password']));
+    $street = $db->escapeString($fn->xss_clean($_POST['street']));
+    $pincode = $db->escapeString($fn->xss_clean($_POST['pincode']));
+    $city = $db->escapeString($fn->xss_clean($_POST['city']));
+    $state = $db->escapeString($fn->xss_clean($_POST['state']));
+ 
+    $sql = "INSERT INTO sellers (name,email,mobile,password,street,pincode,city,state) VALUES('$name','$email','$mobile','$password','$street','$pincode','$city','$state')";
+    $db->sql($sql);
+    $sellers_result = $db->getResult();
 
-        
-        if (empty($name)) {
-            $error['name'] = " <span class='label label-danger'>Required!</span>";
-        }
-       
-
-        if ( !empty($name))
-        {
-                $sql = "INSERT INTO goldsmith_master (name,sundry,open_debit,open_credit,value,place,address,phone,tngst,pure_debit,pure_credit) VALUES('$name','$sundry','$open_debit','$open_credit','$value','$place','$address','$phone','$tngst','$pure_debit','$pure_credit')";
-                $db->sql($sql);
-                $goldsmithmaster_result = $db->getResult();
-                if (!empty($goldsmithmaster_result)) {
-                    $goldsmithmaster_result = 0;
-                } else {
-                    $goldsmithmaster_result = 1;
-                }
-                if ($goldsmithmaster_result == 1) {
-                    $error['add_menu'] = "<section class='content-header'>
-                                                    <span class='label label-success'>Dealer Goldsmith Master Added Successfully</span>
-                                                    <h4><small><a  href='goldsmithmasters.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Goldsmith Master</a></small></h4>
-                                                     </section>";
-                } else {
-                    $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
-                }
-
-            }else{
-                $error['add_menu'] = " <span class='label label-danger'>Dealer Goldsmith Master Already Exists</span>";
-
-            }
-
-
-        }
-    }else{
-        $error['check_permission'] = " <section class='content-header'><span class='label label-danger'>You have no permission to create gold smith master</span></section>";
+    if (!empty($sellers_result)) {
+         
+        $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
+    } else {
+        $error['add_menu'] = "<span class='label label-success'>Success</span>";
 
     }
+}
+
+
 
 ?>
 <section class="content-header">
@@ -90,41 +58,46 @@ if (isset($_POST['btnAdd'])) {
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">  Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="name" id="name" required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> Email</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="email" id="email" required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> Mobile</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="mobile" id="mobile" required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> Password</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="password" id="password" required>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> Street</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="street" id="street"  required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> pincode</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="pincode" id="pincode" required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> City</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="city" id="city" required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> State</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="state" id="state" required>
                                 </div>
-                    <div class="box-footer">
-                        <br>
-                        <br>
-                        <br>
-                        <input type="submit" class="btn-primary btn" value="Add" name="btnAdd" />&nbsp;
+                            </div>
+                        </div>
+
+                    <div class="box-footer ">
+                       
+                        <input type="submit" class="btn-primary btn"  value="Add" name="btnAdd" />&nbsp;
                         <!-- <input type="reset" class="btn-danger btn" value="Clear" id="btnClear" /> -->
                         <!--<div  id="res"></div>-->
                     </div>
