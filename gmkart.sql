@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2022 at 07:08 PM
+-- Generation Time: Sep 13, 2022 at 07:27 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -64,7 +64,61 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'Name'),
-(2, 'Spicy');
+(2, 'Spicy'),
+(3, 'viki');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deliveryboys`
+--
+
+CREATE TABLE `deliveryboys` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `dob` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `pincode` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deliveryboys`
+--
+
+INSERT INTO `deliveryboys` (`id`, `name`, `mobile`, `dob`, `password`, `pincode`) VALUES
+(1, 'vigneswaran', '1234567890', 'admin', 'admin123', '638103'),
+(2, 'viki', '12345678', 'admin', 'admin123', '12345'),
+(3, 'tony', '', 'admin', 'admin123', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sellers`
+--
+
+CREATE TABLE `sellers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `pincode` int(11) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sellers`
+--
+
+INSERT INTO `sellers` (`id`, `name`, `email`, `mobile`, `password`, `street`, `pincode`, `city`, `state`) VALUES
+(1, 'rashmi', 'jha.rashmi.2311@gmail.com', '676777656', '66766777', 'shastri nagar', 765003, 'drdtfy', 'mp'),
+(2, 'ddsd', 'jha.rashmi.2311@gmail.com', '3232', '323232323', '232dssds', 2323232, 'dfdfdfd', 'dfdfdfdf'),
+(3, 'sfsfsfsfsfs', 'ffd@gmail.com', '76766565', 'dfdfd', 'fdfd', 3434343, 'vcvc', 'dfdfdfd'),
+(4, 'sds', 'jha.rashmi.2311@gmail.com', '43343', 'dsds', 'dsds3', 43434, 'dsds', 'dsdsds'),
+(5, 'starj', 'vigneswarang.20it@kongu.edu', '6369079970', 'hijklm', 'erode', 638103, 'chennai', 'tamilnadu');
 
 -- --------------------------------------------------------
 
@@ -119,6 +173,18 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `deliveryboys`
+--
+ALTER TABLE `deliveryboys`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sellers`
+--
+ALTER TABLE `sellers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
@@ -138,7 +204,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `deliveryboys`
+--
+ALTER TABLE `deliveryboys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `sellers`
+--
+ALTER TABLE `sellers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `settings`

@@ -48,9 +48,10 @@ if (isset($_POST['btnAdd'])) {
                                     <label for="exampleInputEmail1"> Category Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
                                     <input type="text" class="form-control" name="name" id = "category-name"required>
                                 </div>
+                        </div>
+                    </div>
                     <div class="box-footer">
-                        <br>
-                        <br>
+                       
                         
                         <div class="col-md-3">
                             <input type="submit" class="btn-primary btn" value="Add" name="btnAdd" />&nbsp;
