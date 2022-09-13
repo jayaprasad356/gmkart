@@ -61,4 +61,24 @@ if (isset($_GET['table']) && $_GET['table'] == 'sellers') {
     print_r(json_encode($bulkData));
 
 }
+if (isset($_GET['table']) && $_GET['table'] == 'categories') {
+    $sql="SELECT * FROM categories";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    $bulkData = array();
+    foreach ($res as $row) {
+        $operate = '<a href="edit-seller.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+
+}
 $db->disconnect();
