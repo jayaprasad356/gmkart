@@ -36,15 +36,29 @@ include_once('../includes/variables.php');
 $db = new Database();
 $db->connect();
 $config = $fn->get_configurations();
-$low_stock_limit = $config['low-stock-limit'];
 
-if (isset($config['system_timezone']) && isset($config['system_timezone_gmt'])) {
-    date_default_timezone_set($config['system_timezone']);
-    $db->sql("SET `time_zone` = '" . $config['system_timezone_gmt'] . "'");
-} else {
-    date_default_timezone_set('Asia/Kolkata');
-    $db->sql("SET `time_zone` = '+05:30'");
+
+if (isset($_GET['table']) && $_GET['table'] == 'sellers') {
+    $sql="SELECT * FROM sellers";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    $bulkData = array();
+    foreach ($res as $row) {
+        $operate = '<a href="edit-seller.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['email'] = $row['email'];
+        $tempRow['mobile'] = $row['mobile'];
+        $tempRow['pincode'] = $row['pincode'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+
 }
-
-
 $db->disconnect();
