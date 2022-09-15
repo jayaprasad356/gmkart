@@ -69,7 +69,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'categories') {
     $tempRow = array();
     $bulkData = array();
     foreach ($res as $row) {
-        $operate = '<a href="edit-seller.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        $operate = '<a href="edit-categories.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
         
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
