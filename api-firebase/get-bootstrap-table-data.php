@@ -95,10 +95,36 @@ if (isset($_GET['table']) && $_GET['table'] == 'categories') {
     $tempRow = array();
     $bulkData = array();
     foreach ($res as $row) {
-        $operate = '<a href="edit-seller.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        $operate = '<a href="edit-categories.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
         
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+
+}
+if (isset($_GET['table']) && $_GET['table'] == 'products') {
+    $sql="SELECT * FROM products";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    $bulkData = array();
+    foreach ($res as $row) {
+        $operate = '<a href="edit-products.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['seller'] = $row['seller'];
+        $tempRow['measurement'] = $row['measurement'];
+        $tempRow['stock'] = $row['stock'];
+        $tempRow['price'] = $row['price'];
+        $tempRow['category'] = $row['category'];
+        $tempRow['description'] = $row['description'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
 
