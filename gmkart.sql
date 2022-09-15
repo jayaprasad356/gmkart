@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2022 at 07:27 PM
+-- Generation Time: Sep 15, 2022 at 06:29 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -64,8 +64,10 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'Name'),
-(2, 'Spicy'),
-(3, 'viki');
+(2, 'more spicy'),
+(3, 'viki'),
+(4, 'last name'),
+(5, 'last name');
 
 -- --------------------------------------------------------
 
@@ -89,7 +91,41 @@ CREATE TABLE `deliveryboys` (
 INSERT INTO `deliveryboys` (`id`, `name`, `mobile`, `dob`, `password`, `pincode`) VALUES
 (1, 'vigneswaran', '1234567890', 'admin', 'admin123', '638103'),
 (2, 'viki', '12345678', 'admin', 'admin123', '12345'),
-(3, 'tony', '', 'admin', 'admin123', '');
+(3, 'tony', '', 'admin', 'admin123', ''),
+(4, 'arjun', '325256326', '221123', 'safgasg', '32425');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `seller` varchar(255) DEFAULT NULL,
+  `measurement` varchar(255) DEFAULT NULL,
+  `stock` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `seller`, `measurement`, `stock`, `price`, `category`, `description`) VALUES
+(1, 'Pipes', 'Tata', '23', '144', '2.5B', 'Steel', 'Stell pipes'),
+(2, 'Price Drop', NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Price Drop', NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Tesla', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'b ghn', 'njnj', NULL, NULL, NULL, NULL, NULL),
+(6, 'asfas', 'safsaf', 'asfasf', NULL, NULL, NULL, NULL),
+(7, 'sdagfsdg', 'dsgsdg', 'dsgsdg', 'dsgsdg', NULL, NULL, NULL),
+(8, 'safgsa', 'sdgsdg', 'dsgsdg', 'sdgds', 'dsgsgd', 'dsgsdg', 'asfsaf'),
+(9, 'safas', 'asfasf', 'asfa', 'asfasf', 'safsaf', 'asfsaf', 'safsaf'),
+(10, 'fasfaf', 'safas', 'asfasf', 'afas', 'asfasf', 'asfasf', 'arjuhnj');
 
 -- --------------------------------------------------------
 
@@ -118,7 +154,8 @@ INSERT INTO `sellers` (`id`, `name`, `email`, `mobile`, `password`, `street`, `p
 (2, 'ddsd', 'jha.rashmi.2311@gmail.com', '3232', '323232323', '232dssds', 2323232, 'dfdfdfd', 'dfdfdfdf'),
 (3, 'sfsfsfsfsfs', 'ffd@gmail.com', '76766565', 'dfdfd', 'fdfd', 3434343, 'vcvc', 'dfdfdfd'),
 (4, 'sds', 'jha.rashmi.2311@gmail.com', '43343', 'dsds', 'dsds3', 43434, 'dsds', 'dsdsds'),
-(5, 'starj', 'vigneswarang.20it@kongu.edu', '6369079970', 'hijklm', 'erode', 638103, 'chennai', 'tamilnadu');
+(5, 'starj', 'vigneswarang.20it@kongu.edu', '6369079970', 'hijklm', 'erode', 638103, 'chennai', 'tamilnadu'),
+(6, 'arjun', 'arjun123@gmail.com', '32153262346', 'safsdgasdg', '23525 dsgsedg', 2354325, 'dsgdsg', 'dsgsg');
 
 -- --------------------------------------------------------
 
@@ -179,6 +216,12 @@ ALTER TABLE `deliveryboys`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sellers`
 --
 ALTER TABLE `sellers`
@@ -204,19 +247,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `deliveryboys`
 --
 ALTER TABLE `deliveryboys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `settings`
