@@ -1,10 +1,10 @@
 <section class="content-header">
     <h1>
-        Categories /
+        Products /
         <small><a href="home.php"><i class="fa fa-home"></i> Home</a></small>
     </h1>
     <ol class="breadcrumb">
-        <a class="btn btn-block btn-default" href="add-products.php"><i class="fa fa-plus-square"></i> Add New Category</a>
+        <a class="btn btn-block btn-default" href="add-products.php"><i class="fa fa-plus-square"></i> Add New Product</a>
     </ol>
 
 

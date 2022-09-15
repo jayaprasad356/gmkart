@@ -43,7 +43,7 @@ $data = $row;
 
 ?>
 <section class="content-header">
-    <h1>Edit Dealer Goldsmith Master</h1>
+    <h1>Edit Products</h1>
     <?php echo isset($error['add_menu']) ? $error['add_menu'] : ''; ?>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
@@ -55,7 +55,6 @@ $data = $row;
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Edit Dealer Goldsmith Master</h3>
                 </div>
                 <div class="box-header">
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>
