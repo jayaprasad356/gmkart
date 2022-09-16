@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2022 at 06:29 PM
+-- Generation Time: Sep 16, 2022 at 09:06 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -97,17 +97,39 @@ INSERT INTO `deliveryboys` (`id`, `name`, `mobile`, `dob`, `password`, `pincode`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`id`, `title`, `message`) VALUES
+(1, '', ''),
+(2, '', ''),
+(3, 'sdagasdg', 'sdgdasg'),
+(4, 'sdgasg', 'dsgasdg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `seller` varchar(255) DEFAULT NULL,
+  `seller_id` int(11) DEFAULT NULL,
   `measurement` varchar(255) DEFAULT NULL,
   `stock` varchar(255) DEFAULT NULL,
   `price` varchar(255) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -115,17 +137,24 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `seller`, `measurement`, `stock`, `price`, `category`, `description`) VALUES
-(1, 'Pipes', 'Tata', '23', '144', '2.5B', 'Steel', 'Stell pipes'),
+INSERT INTO `products` (`id`, `name`, `seller_id`, `measurement`, `stock`, `price`, `category_id`, `description`) VALUES
+(1, 'Pipes', 0, '23', '144', '2.5B', 0, 'Stell pipes'),
 (2, 'Price Drop', NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 'Price Drop', NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 'Tesla', NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 'b ghn', 'njnj', NULL, NULL, NULL, NULL, NULL),
-(6, 'asfas', 'safsaf', 'asfasf', NULL, NULL, NULL, NULL),
-(7, 'sdagfsdg', 'dsgsdg', 'dsgsdg', 'dsgsdg', NULL, NULL, NULL),
-(8, 'safgsa', 'sdgsdg', 'dsgsdg', 'sdgds', 'dsgsgd', 'dsgsdg', 'asfsaf'),
-(9, 'safas', 'asfasf', 'asfa', 'asfasf', 'safsaf', 'asfsaf', 'safsaf'),
-(10, 'fasfaf', 'safas', 'asfasf', 'afas', 'asfasf', 'asfasf', 'arjuhnj');
+(5, 'b ghn', 0, NULL, NULL, NULL, NULL, NULL),
+(6, 'asfas', 0, 'asfasf', NULL, NULL, NULL, NULL),
+(7, 'sdagfsdg', 0, 'dsgsdg', 'dsgsdg', NULL, NULL, NULL),
+(8, 'safgsa', 0, 'dsgsdg', 'sdgds', 'dsgsgd', 0, 'asfsaf'),
+(9, 'safas', 0, 'asfa', 'asfasf', 'safsaf', 0, 'safsaf'),
+(10, 'fasfaf', 0, 'asfasf', 'afas', 'asfasf', 0, 'arjuhnj'),
+(11, 'asda', 0, 'asdas', 'asdas', 'asdasd', 2, 'sadasd'),
+(12, 'asda', 0, 'asdas', 'asdas', 'asdasd', 2, 'sadasd'),
+(13, 'sdgsad', 0, 'dsgasdg', 'dsgasd', 'dsgasdg', 3, 'dsgasg'),
+(14, 'sdgsad', 0, 'dsgasdg', 'dsgasd', 'dsgasdg', 3, 'dsgasg'),
+(15, 'sdgsdg', 0, 'sdgsgd', 'sdgsdg', 'sdgsdg', 1, 'sdgsd'),
+(16, 'sdgsdg', 0, 'sdgsgd', 'sdgsdg', 'sdgsdg', 1, 'sdgsd'),
+(17, 'asfasf', 3, 'asfasf', 'asfasf', 'asfasf', 2, 'asfasf');
 
 -- --------------------------------------------------------
 
@@ -216,6 +245,12 @@ ALTER TABLE `deliveryboys`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -256,10 +291,16 @@ ALTER TABLE `deliveryboys`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `sellers`

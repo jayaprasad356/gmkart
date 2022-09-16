@@ -108,7 +108,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'categories') {
 
 }
 if (isset($_GET['table']) && $_GET['table'] == 'products') {
-    $sql="SELECT * FROM products";
+    $sql="SELECT *,sellers.name AS seller_name FROM products,sellers WHERE products.seller_id = sellers.id";
     $db->sql($sql);
     $res = $db->getResult();
     $rows = array();
@@ -120,6 +120,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['seller_id'] = $row['seller_id'];
+        $tempRow['seller_name'] = $row['seller_name'];
         $tempRow['measurement'] = $row['measurement'];
         $tempRow['stock'] = $row['stock'];
         $tempRow['price'] = $row['price'];

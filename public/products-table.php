@@ -28,6 +28,7 @@
                                     <th data-field="id" data-sortable="true">ID</th>
                                     <th data-field="name" data-sortable="true">Name</th>
                                     <th data-field="seller_id" data-sortable="true">Seller_id</th>
+                                    <th data-field="seller_name" data-sortable="true">Seller Name</th>
                                     <th data-field="measurement" data-sortable="true">Measurement</th>
                                     <th data-field="stock" data-sortable="true">Stock</th>
                                     <th data-field="price" data-sortable="true">Price</th>
