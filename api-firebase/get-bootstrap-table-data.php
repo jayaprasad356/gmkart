@@ -155,4 +155,24 @@ if (isset($_GET['table']) && $_GET['table'] == 'notification') {
     print_r(json_encode($bulkData));
 
 }
+if (isset($_GET['table']) && $_GET['table'] == 'pincode') {
+    $sql="SELECT * FROM pincode";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    $bulkData = array();
+    foreach ($res as $row) {
+        $operate = '<a href="edit-pincode.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['pincode'] = $row['pincode'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+
+}
 $db->disconnect();
