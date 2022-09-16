@@ -15,14 +15,12 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['btnUpdate'])) {
     $error = array();
-    $name = $db->escapeString($fn->xss_clean($_POST['name']));
-    $email = $db->escapeString($fn->xss_clean($_POST['email']));
-    $mobile = $db->escapeString($fn->xss_clean($_POST['mobile']));
-    $pincode= $db->escapeString($fn->xss_clean($_POST['pincode']));
-    $sql = "UPDATE sellers SET name='$name', email='$email', mobile='$mobile', pincode='$pincode' WHERE id = '$ID'";
+    $title = $db->escapeString($fn->xss_clean($_POST['title']));
+    $message = $db->escapeString($fn->xss_clean($_POST['message']));
+    $sql = "UPDATE notification SET title='$title' message = '$message' WHERE id = '$ID'";
     $db->sql($sql);
-    $sellers_result = $db->getResult();
-    if (!empty($sellers_result)) {
+    $notification_result = $db->getResult();
+    if (!empty($notification_result)) {
         $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
     } else {
         $error['add_menu'] = " <span class='label label-success'>Success</span>";
@@ -32,7 +30,7 @@ if (isset($_POST['btnUpdate'])) {
 
 $data = array();
 
-$sql_query = "SELECT * FROM `sellers` WHERE id = '$ID'";
+$sql_query = "SELECT * FROM `notification` WHERE id = '$ID'";
 $db->sql($sql_query);
 $res = $db->getResult();
 foreach ($res as $row)
@@ -40,7 +38,7 @@ $data = $row;
 
 ?>
 <section class="content-header">
-    <h1>Edit Seller</h1>
+    <h1>Edit Notification</h1>
     <?php echo isset($error['add_menu']) ? $error['add_menu'] : ''; ?>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
@@ -52,6 +50,7 @@ $data = $row;
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <h3 class="box-title">Edit Notification</h3>
                 </div>
                 <div class="box-header">
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>
@@ -59,30 +58,23 @@ $data = $row;
 
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form id='edit_sellers_form' method="post" enctype="multipart/form-data">
+                <form id='edit_notification_form' method="post" enctype="multipart/form-data">
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group">
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1"> Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" value="<?php echo $data['name']?>" required>
+                                    <label for="exampleInputEmail1"> Title</label> <i class="text-danger asterik">*</i><?php echo isset($error['title']) ? $error['title'] : ''; ?>
+                                    <input type="text" class="form-control" name="title" value="<?php echo $data['title']?>" required>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">Email</label> <i class="text-danger asterik">*</i><?php echo isset($error['email']) ? $error['email'] : ''; ?>
-                                    <input type="text" class="form-control" name="email" value="<?php echo $data['email']?>" required>
+                                    <label for="exampleInputEmail1"> Message</label> <i class="text-danger asterik">*</i><?php echo isset($error['message']) ? $error['message'] : ''; ?>
+                                    <input type="text" class="form-control" name="message" value="<?php echo $data['message']?>" required>
                                 </div>
-                                <div class='col-md-3'>
-                                    <label for="exampleInputEmail1"> mobile</label> <i class="text-danger asterik">*</i><?php echo isset($error['mobile']) ? $error['mobile'] : ''; ?>
-                                    <input type="text" class="form-control" name="mobile" value="<?php echo $data['mobile']?>" required>
-                                </div>
-                                <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">pincode</label> <i class="text-danger asterik">*</i><?php echo isset($error['pincode']) ? $error['pincode'] : ''; ?>
-                                    <input type="text" class="form-control" name="pincode" value="<?php echo $data['pincode']?>" required>
-                                </div>
-                             <hr>
+                               
+                        <hr>
 
-                            </div><!-- /.box-body -->
-                        </div>
+                </div><!-- /.box-body -->
+                    
                     <div class="box-footer">
                         <input type="submit" class="btn-primary btn" value="Update" name="btnUpdate" />&nbsp;
                         <!-- <input type="reset" class="btn-danger btn" value="Clear" id="btnClear" /> -->

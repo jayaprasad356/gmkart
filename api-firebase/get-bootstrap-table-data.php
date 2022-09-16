@@ -119,12 +119,33 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
-        $tempRow['seller'] = $row['seller'];
+        $tempRow['seller_id'] = $row['seller_id'];
         $tempRow['measurement'] = $row['measurement'];
         $tempRow['stock'] = $row['stock'];
         $tempRow['price'] = $row['price'];
-        $tempRow['category'] = $row['category'];
+        $tempRow['category_id'] = $row['category_id'];
         $tempRow['description'] = $row['description'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+
+}
+if (isset($_GET['table']) && $_GET['table'] == 'notification') {
+    $sql="SELECT * FROM notification";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    $bulkData = array();
+    foreach ($res as $row) {
+        $operate = '<a href="edit-notification.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['title'] = $row['title'];
+        $tempRow['message'] = $row['message'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
 

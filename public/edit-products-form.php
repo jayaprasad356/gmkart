@@ -16,13 +16,13 @@ if (isset($_GET['id'])) {
 if (isset($_POST['btnUpdate'])) {
     $error = array();
     $name = $db->escapeString($fn->xss_clean($_POST['name']));
-    $seller = $db->escapeString($fn->xss_clean($_POST['seller']));
+    $seller_id = $db->escapeString($fn->xss_clean($_POST['seller_id']));
     $measurement = $db->escapeString($fn->xss_clean($_POST['measurement']));
     $stock = $db->escapeString($fn->xss_clean($_POST['stock']));
     $price = $db->escapeString($fn->xss_clean($_POST['price']));
-    $category = $db->escapeString($fn->xss_clean($_POST['category']));
+    $category_id = $db->escapeString($fn->xss_clean($_POST['category_id']));
     $description = $db->escapeString($fn->xss_clean($_POST['description']));
-    $sql = "UPDATE products SET name='$name',seller='$seller',measurement='$measurement',stock='$stock',price='$price',category='$category', description ='$description' WHERE id = '$ID'";
+    $sql = "UPDATE products SET name='$name',seller_id='$seller_id',measurement='$measurement',stock='$stock',price='$price',category_id='$category_id', description ='$description' WHERE id = '$ID'";
     $db->sql($sql);
     $products_result = $db->getResult();
     if (!empty($products_result)) {
@@ -71,8 +71,18 @@ $data = $row;
                                     <input type="text" class="form-control" name="name" value="<?php echo $data['name']?>" required>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1"> Seller</label> <i class="text-danger asterik">*</i><?php echo isset($error['seller']) ? $error['seller'] : ''; ?>
-                                    <input type="text" class="form-control" name="seller" value="<?php echo $data['seller']?>" required>
+                                    <label for="exampleInputEmail1"> Seller</label> <i class="text-danger asterik">*</i><?php echo isset($error['seller_id']) ? $error['seller_id'] : ''; ?>
+                                    <select id='seller_id' name="seller_id" class='form-control' required>
+                                        <option value="">Select Seller</option>
+                                                <?php
+                                                $sql = "SELECT * FROM `sellers`";
+                                                $db->sql($sql);
+                                                $result = $db->getResult();
+                                                foreach ($result as $value) {
+                                                ?>
+                                                    <option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                    </select>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> Measurement</label> <i class="text-danger asterik">*</i><?php echo isset($error['measurement']) ? $error['measurement'] : ''; ?>
@@ -87,8 +97,18 @@ $data = $row;
                                     <input type="text" class="form-control" name="price" value="<?php echo $data['price']?>" required>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1"> Category</label> <i class="text-danger asterik">*</i><?php echo isset($error['category']) ? $error['category'] : ''; ?>
-                                    <input type="text" class="form-control" name="category" value="<?php echo $data['category']?>" required>
+                                    <label for="exampleInputEmail1"> Category</label> <i class="text-danger asterik">*</i><?php echo isset($error['category_id']) ? $error['category_id'] : ''; ?>
+                                    <select id='category_id' name="category_id" class='form-control' required>
+                                    <option value="">Select Category</option>
+                                                <?php
+                                                $sql = "SELECT * FROM `categories`";
+                                                $db->sql($sql);
+                                                $result = $db->getResult();
+                                                foreach ($result as $value) {
+                                                ?>
+                                                    <option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                    </select>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> Description</label> <i class="text-danger asterik">*</i><?php echo isset($error['description']) ? $error['description'] : ''; ?>

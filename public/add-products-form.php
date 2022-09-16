@@ -9,13 +9,13 @@ $fn = new custom_functions;
 if (isset($_POST['btnAdd'])) {
     $error = array();
     $name = $db->escapeString($fn->xss_clean($_POST['name']));
-    $seller = $db->escapeString($fn->xss_clean($_POST['seller']));
+    $seller_id = $db->escapeString($fn->xss_clean($_POST['seller_id']));
     $measurement = $db->escapeString($fn->xss_clean($_POST['measurement']));
     $stock = $db->escapeString($fn->xss_clean($_POST['stock']));
     $price = $db->escapeString($fn->xss_clean($_POST['price']));
-    $category = $db->escapeString($fn->xss_clean($_POST['category']));
+    $category_id = $db->escapeString($fn->xss_clean($_POST['category_id']));
     $description = $db->escapeString($fn->xss_clean($_POST['description']));
-    $sql = "INSERT INTO products (name,seller,measurement,stock,price,category,description) VALUES('$name','$seller','$measurement','$stock','$price','$category','$description')";
+    $sql = "INSERT INTO products (name,seller_id,measurement,stock,price,category_id,description) VALUES('$name','$seller_id','$measurement','$stock','$price','$category_id','$description')";
     $db->sql($sql);
     $products_result = $db->getResult();
     if (!empty($products_result)) {
@@ -52,27 +52,47 @@ if (isset($_POST['btnAdd'])) {
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" id = "category-name"required>
+                                    <input type="text" class="form-control" name="name" id = "name"required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Seller</label> <i class="text-danger asterik">*</i><?php echo isset($error['seller']) ? $error['seller'] : ''; ?>
-                                    <input type="text" class="form-control" name="seller" id = "category-name"required>
+                                    <select id='seller_id' name="seller_id" class='form-control' required>
+                                        <option value="">Select Seller</option>
+                                                <?php
+                                                $sql = "SELECT * FROM `sellers`";
+                                                $db->sql($sql);
+                                                $result = $db->getResult();
+                                                foreach ($result as $value) {
+                                                ?>
+                                                    <option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                    </select>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Measurement</label> <i class="text-danger asterik">*</i><?php echo isset($error['measurement']) ? $error['measurement'] : ''; ?>
-                                    <input type="text" class="form-control" name="measurement" id = "category-name"required>
+                                    <input type="text" class="form-control" name="measurement" id = "measurement"required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1"> Stock</label> <i class="text-danger asterik">*</i><?php echo isset($error['stock']) ? $error['stock'] : ''; ?>
-                                    <input type="text" class="form-control" name="stock" id = "category-name"required>
+                                    <input type="text" class="form-control" name="stock" id = "stock"required>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Price</label> <i class="text-danger asterik">*</i><?php echo isset($error['price']) ? $error['price'] : ''; ?>
-                                    <input type="text" class="form-control" name="price" id = "category-name"required>
+                                    <input type="text" class="form-control" name="price" id = "price"required>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1"> Category</label> <i class="text-danger asterik">*</i><?php echo isset($error['category']) ? $error['category'] : ''; ?>
-                                    <input type="text" class="form-control" name="category" id = "category-name"required>
+                                    <label for="exampleInputEmail1"> Category</label> <i class="text-danger asterik">*</i><?php echo isset($error['category_id']) ? $error['category_id'] : ''; ?>
+                                    <select id='category_id' name="category_id" class='form-control' required>
+                                    <option value="">Select Category</option>
+                                                <?php
+                                                $sql = "SELECT * FROM `categories`";
+                                                $db->sql($sql);
+                                                $result = $db->getResult();
+                                                foreach ($result as $value) {
+                                                ?>
+                                                    <option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
+                                            <?php } ?>
+                                    </select>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Description</label> <i class="text-danger asterik">*</i><?php echo isset($error['description']) ? $error['description'] : ''; ?>
