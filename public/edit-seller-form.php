@@ -76,8 +76,18 @@ $data = $row;
                                     <input type="text" class="form-control" name="mobile" value="<?php echo $data['mobile']?>" required>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">pincode</label> <i class="text-danger asterik">*</i><?php echo isset($error['pincode']) ? $error['pincode'] : ''; ?>
-                                    <input type="text" class="form-control" name="pincode" value="<?php echo $data['pincode']?>" required>
+                                    <label for="exampleInputEmail1"> pincode</label> <i class="text-danger asterik">*</i><?php echo isset($error['pincode']) ? $error['pincode'] : ''; ?>
+                                    <select id='pincode_id' name="pincode_id" class='form-control' required>
+                                    <option value="">Select Pincode</option>
+                                                <?php
+                                                $sql = "SELECT * FROM `pincode`";
+                                                $db->sql($sql);
+                                                $result = $db->getResult();
+                                                foreach ($result as $value) {
+                                                ?>
+                                                    <option value='<?= $value['id'] ?>'><?= $value['pincode'] ?></option>
+                                            <?php } ?>
+                                    </select>
                                 </div>
                              <hr>
 
