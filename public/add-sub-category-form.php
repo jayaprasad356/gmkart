@@ -41,7 +41,7 @@ if (isset($_POST['btnAdd'])) {
 
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form id='add_goldsmith_master_form' method="post" enctype="multipart/form-data">
+                <form id='add_sub_category_form' method="post" enctype="multipart/form-data">
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group">
