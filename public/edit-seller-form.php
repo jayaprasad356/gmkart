@@ -76,7 +76,11 @@ $data = $row;
                                     <input type="text" class="form-control" name="mobile" value="<?php echo $data['mobile']?>" required>
                                 </div>
                                 <div class='col-md-3'>
+<<<<<<< HEAD
                                     <label for="exampleInputEmail1">pincode</label> <i class="text-danger asterik">*</i><?php echo isset($error['pincode']) ? $error['pincode'] : ''; ?>
+=======
+                                    <label for="exampleInputEmail1"> pincode</label> <i class="text-danger asterik">*</i><?php echo isset($error['pincode']) ? $error['pincode'] : ''; ?>
+>>>>>>> 0373600eacf988af9e97a05cd008dde9a5d0b74d
                                     <select id='pincode_id' name="pincode_id" class='form-control' required>
                                     <option value="">Select Pincode</option>
                                                 <?php
