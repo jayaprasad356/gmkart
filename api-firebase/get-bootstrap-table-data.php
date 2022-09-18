@@ -175,4 +175,25 @@ if (isset($_GET['table']) && $_GET['table'] == 'pincode') {
     print_r(json_encode($bulkData));
 
 }
+if (isset($_GET['table']) && $_GET['table'] == 'sub_category') {
+    $sql="SELECT * FROM sub_category";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $rows = array();
+    $tempRow = array();
+    $bulkData = array();
+    foreach ($res as $row) {
+        $operate = '<a href="edit-sub-category.php?id=' . $row['id'] . '" class="label label-primary" title="Edit">Edit</a>';
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['categories'] = $row['categories'];
+        $tempRow['sub_category'] = $row['sub_category'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+
+}
 $db->disconnect();

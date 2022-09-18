@@ -15,14 +15,12 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['btnUpdate'])) {
     $error = array();
-    $name = $db->escapeString($fn->xss_clean($_POST['name']));
-    $email = $db->escapeString($fn->xss_clean($_POST['email']));
-    $mobile = $db->escapeString($fn->xss_clean($_POST['mobile']));
-    $pincode= $db->escapeString($fn->xss_clean($_POST['pincode']));
-    $sql = "UPDATE sellers SET name='$name', email='$email', mobile='$mobile', pincode='$pincode' WHERE id = '$ID'";
+    $categories = $db->escapeString($fn->xss_clean($_POST['categories']));
+    $sub_category = $db->escapeString($fn->xss_clean($_POST['sub_category']));
+    $sql = "UPDATE sub_category SET categories='$categories', sub_category='$sub_category' WHERE id = '$ID'";
     $db->sql($sql);
-    $sellers_result = $db->getResult();
-    if (!empty($sellers_result)) {
+    $sub_category_result = $db->getResult();
+    if (!empty($sub_category_result)) {
         $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
     } else {
         $error['add_menu'] = " <span class='label label-success'>Success</span>";
@@ -32,7 +30,7 @@ if (isset($_POST['btnUpdate'])) {
 
 $data = array();
 
-$sql_query = "SELECT * FROM `sellers` WHERE id = '$ID'";
+$sql_query = "SELECT * FROM `sub_category` WHERE id = '$ID'";
 $db->sql($sql_query);
 $res = $db->getResult();
 foreach ($res as $row)
@@ -64,31 +62,24 @@ $data = $row;
                         <div class="row">
                             <div class="form-group">
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1"> Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                    <input type="text" class="form-control" name="name" value="<?php echo $data['name']?>" required>
-                                </div>
-                                <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">Email</label> <i class="text-danger asterik">*</i><?php echo isset($error['email']) ? $error['email'] : ''; ?>
-                                    <input type="text" class="form-control" name="email" value="<?php echo $data['email']?>" required>
-                                </div>
-                                <div class='col-md-3'>
-                                    <label for="exampleInputEmail1"> mobile</label> <i class="text-danger asterik">*</i><?php echo isset($error['mobile']) ? $error['mobile'] : ''; ?>
-                                    <input type="text" class="form-control" name="mobile" value="<?php echo $data['mobile']?>" required>
-                                </div>
-                                <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">pincode</label> <i class="text-danger asterik">*</i><?php echo isset($error['pincode']) ? $error['pincode'] : ''; ?>
-                                    <select id='pincode_id' name="pincode_id" class='form-control' required>
-                                    <option value="">Select Pincode</option>
+                                    <label for="exampleInputEmail1"> Categories</label> <i class="text-danger asterik">*</i><?php echo isset($error['categories']) ? $error['categories'] : ''; ?>
+                                    <select id='category_id' name="categories" class='form-control' required>
+                                    <option value="">Categories</option>
                                                 <?php
-                                                $sql = "SELECT * FROM `pincode`";
+                                                $sql = "SELECT * FROM `categories`";
                                                 $db->sql($sql);
                                                 $result = $db->getResult();
                                                 foreach ($result as $value) {
                                                 ?>
-                                                    <option value='<?= $value['id'] ?>'><?= $value['pincode'] ?></option>
+                                                    <option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
                                             <?php } ?>
                                     </select>
                                 </div>
+                                <div class='col-md-3'>
+                                    <label for="exampleInputEmail1"> Sub-Category</label> <i class="text-danger asterik">*</i><?php echo isset($error['sub_category']) ? $error['sub_category'] : ''; ?>
+                                    <input type="text" class="form-control" name="sub_category" value="<?php echo $data['sub_category']?>" required>
+                                </div>
+                               
                              <hr>
 
                             </div><!-- /.box-body -->
